@@ -6,6 +6,14 @@ Sub VBA_Assignment():
 ' The percent change from opening price to closing price
 ' The total stock volume
 
+'loop through all worksheets
+Dim ws As Worksheet
+
+For Each ws In ThisWorkbook.Worksheets
+
+ws.Activate
+
+
 'Declare variables
 Dim i As Double
 Dim j As Double
@@ -23,7 +31,7 @@ Dim ticker As String
 
 'assigning initial info to varibales
 summarytbl = 2
-open_price = Range("C2").Value
+open_price = Cells(2, 3).Value
 close_price = 0
 tVolume = 0
 
@@ -74,6 +82,22 @@ End If
 
 Next i
 
+For i = 2 To lrow
 
+ For j = 11 To 12
+ 
+    If Cells(i, j).Value >= 0 Then
+    Cells(i, j).Interior.ColorIndex = 4
+    
+    Else
+    Cells(i, j).Interior.ColorIndex = 3
+ End If
+ Next j
+ Next i
+
+ActiveSheet.UsedRange.EntireColumn.AutoFit 
+
+Next ws
+ 
 End Sub
 
