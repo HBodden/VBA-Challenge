@@ -20,7 +20,7 @@ Dim j As Double
 Dim tblSet As Integer
 Dim newcell As Integer
 Dim summarytbl As Integer
-Dim lrow As Integer
+Dim lrow As Long
 Dim open_price As Double
 Dim close_price As Double
 Dim yearly_Change As Double
@@ -58,7 +58,7 @@ If (Cells(i + 1, 1).Value <> Cells(i, 1).Value) Then
 'Capture the close price
 close_price = Cells(i, 6).Value
 yearly_Change = open_price - close_price
-percent_change = (yearly_Change / open_price) * 100
+percent_change = (yearly_Change / open_price)
 
 Cells(summarytbl, 10).Value = ticker
 Cells(summarytbl, 11).Value = yearly_Change
@@ -77,27 +77,28 @@ Else
 
 ticker = Cells(i, 1).Value
 
-
 End If
-
 Next i
 
 For i = 2 To lrow
 
  For j = 11 To 12
  
-    If Cells(i, j).Value >= 0 Then
+    If Cells(i, j).Value >= 0 And j = 11 Then
     Cells(i, j).Interior.ColorIndex = 4
     
-    Else
+    ElseIf Cells(i, j).Value < 0 And j = 11 Then
     Cells(i, j).Interior.ColorIndex = 3
- End If
- Next j
- Next i
+    
+    ElseIf j = 12 Then
+    Cells(i, j).NumberFormat = "#.##%"
+ 
+End If
+Next j
+Next i
 
-ActiveSheet.UsedRange.EntireColumn.AutoFit 
+ActiveSheet.UsedRange.EntireColumn.AutoFit
 
 Next ws
  
 End Sub
-
