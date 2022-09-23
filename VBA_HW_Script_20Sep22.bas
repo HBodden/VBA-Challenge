@@ -6,7 +6,7 @@ Sub VBA_Assignment():
 ' The percent change from opening price to closing price
 ' The total stock volume
 
-'loop through all worksheets
+ 'loop through all worksheets code for worksheet found at excelchamps.com/vba/loop-sheets/
 Dim ws As Worksheet
 
 For Each ws In ThisWorkbook.Worksheets
